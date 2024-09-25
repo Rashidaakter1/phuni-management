@@ -11,8 +11,6 @@ export const USER_ROLE = {
     FACULTY: "faculty",
 }
 
-
-console.log(sidebarItemsGenerator(adminPaths, USER_ROLE.ADMIN))
 const getSidebarItems = () => {
     const role = "admin";
     let sidebarItems: TSidebar[];
@@ -50,7 +48,7 @@ const Sidebar = () => {
                 theme="dark"
                 mode="inline"
                 defaultSelectedKeys={['4']}
-                items={getSidebarItems()} 
+                items={getSidebarItems()}
             />
         </Sider>
     )
