@@ -1,11 +1,12 @@
 import OfferedCourse from "../pages/student/OfferedCourse";
-import StudentDashbaord from "../pages/student/StudentDashbaord";
+import StudentDashboard from "../pages/student/StudentDashboard";
+
 
 export const studentPaths = [
     {
         name: 'Dashboard',
         path: 'dashboard',
-        element: <StudentDashbaord />,
+        element: <StudentDashboard />,
     },
     {
         name: 'User Management',
@@ -15,7 +16,13 @@ export const studentPaths = [
                 path: 'offered-course',
                 element: <OfferedCourse />,
             },
-            
+            {
+                name: 'Course',
+                path: 'course',
+                element: <OfferedCourse />,
+            },
+
         ],
     },
 ];
+
