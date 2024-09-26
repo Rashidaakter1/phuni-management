@@ -1,10 +1,11 @@
 import { Layout, Menu, } from 'antd';
-import sidebarItemsGenerator from '../../utils/sidebarItemsGenerator';
+
 import { adminPaths } from '../../routes/admin.routes';
 import { studentPaths } from '../../routes/student.route';
 import { TSidebar } from '../../type';
 import { useAppSelector } from '../../redux/hooks';
 import { selectCurrentUser } from '../../redux/features/auth/authSlice';
+import { sidebarItemsGenerator } from '../../utils/sidebarItemsGenerator';
 const { Sider } = Layout;
 
 export const USER_ROLE = {
