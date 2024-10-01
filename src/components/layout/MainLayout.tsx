@@ -18,7 +18,7 @@ const MainLayout = () => {
         navigate("/auth/signin")
     }
     return (
-        <Layout style={{ height: "100vh" }}>
+        <Layout style={{ minHeight: "100vh" }}>
             <Sidebar />
             <Layout>
                 <Header style={{ padding: 0, }} ><Button onClick={() => handleLogout()}>Logout</Button></Header>
