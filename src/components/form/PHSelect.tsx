@@ -5,11 +5,12 @@ import { Controller } from 'react-hook-form'
 export type TPHSelectProps = {
     name: string,
     label: string,
-    options: { value: string; label: string; disabled?: boolean }[]
+    options: { value: string; label: string; disabled?: boolean }[] | undefined,
+    disabled?: boolean
 }
 
 
-const PHSelect = ({ name, label, options }: TPHSelectProps) => {
+const PHSelect = ({ name, label, options, disabled }: TPHSelectProps) => {
     return (
         <>
             <Controller
@@ -17,6 +18,7 @@ const PHSelect = ({ name, label, options }: TPHSelectProps) => {
                 render={({ field, fieldState: { error } }) => (<Form.Item label={label}>
                     <Select
                         {...field}
+                        disabled={disabled}
                         style={{ width: "100%" }}
                         options={options}
                         size="large"

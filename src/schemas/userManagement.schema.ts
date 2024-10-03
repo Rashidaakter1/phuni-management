@@ -55,11 +55,7 @@ const localGuardianValidationSchema = z.object({
 });
 
 export const createStudentValidationSchema = z.object({
-  password: z
-    .string()
-    .max(20, "Password cannot exceed 20 characters")
-    .optional(),
-  student: z.object({
+ 
     name: userNameValidationSchema,
     gender: z.enum(["male", "female", "other"], {
       required_error: "Gender is required",
@@ -94,16 +90,11 @@ export const createStudentValidationSchema = z.object({
     academicDepartment: z.string({
       required_error: "Academic Department is required",
     }),
-  }),
+
 });
 
 export const createFacultyValidationSchema = z.object({
-  password: z
-    .string({
-      required_error: "Please add a password",
-    })
-    .max(20),
-  faculty: z.object({
+ 
     name: userNameValidationSchema,
     designation: z.string({
       required_error: "Please add a designation",
@@ -138,16 +129,11 @@ export const createFacultyValidationSchema = z.object({
     academicDepartment: z.string({
       required_error: "Please select an academic department",
     }),
-  }),
+ 
 });
 
 export const createAdminValidationSchema = z.object({
-  password: z
-    .string({
-      required_error: "Password is required",
-    })
-    .max(20, "Password cannot exceed 20 characters"),
-  admin: z.object({
+  
     name: userNameValidationSchema,
     gender: z.enum(["male", "female", "other"], {
       required_error: "Gender is required",
@@ -173,5 +159,5 @@ export const createAdminValidationSchema = z.object({
     permanentAddress: z.string({
       required_error: "Permanent Address is required",
     }),
-  }),
+
 });
