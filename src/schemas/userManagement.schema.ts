@@ -55,109 +55,102 @@ const localGuardianValidationSchema = z.object({
 });
 
 export const createStudentValidationSchema = z.object({
- 
-    name: userNameValidationSchema,
-    gender: z.enum(["male", "female", "other"], {
-      required_error: "Gender is required",
-    }),
-    dateOfBirth: z.string().optional(),
-    email: z
-      .string({
-        required_error: "Email is required",
-      })
-      .email("Invalid email format"),
-    contactNo: z.string({
-      required_error: "Contact Number is required",
-    }),
-    emergencyContactNo: z.string({
-      required_error: "Emergency Contact Number is required",
-    }),
-    bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], {
-      required_error: "Blood Group is required",
-    }),
-    presentAddress: z.string({
-      required_error: "Present Address is required",
-    }),
-    permanentAddress: z.string({
-      required_error: "Permanent Address is required",
-    }),
-    guardian: guardianValidationSchema,
-    localGuardian: localGuardianValidationSchema,
-    admissionSemester: z.string({
-      required_error: "Admission Semester is required",
-    }),
-    profileImg: z.string().optional(),
-    academicDepartment: z.string({
-      required_error: "Academic Department is required",
-    }),
-
+  name: userNameValidationSchema,
+  gender: z.enum(["male", "female", "other"], {
+    required_error: "Gender is required",
+  }),
+  dateOfBirth: z.string().optional(),
+  email: z
+    .string({
+      required_error: "Email is required",
+    })
+    .email("Invalid email format"),
+  contactNo: z.string({
+    required_error: "Contact Number is required",
+  }),
+  emergencyContactNo: z.string({
+    required_error: "Emergency Contact Number is required",
+  }),
+  bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], {
+    required_error: "Blood Group is required",
+  }),
+  presentAddress: z.string({
+    required_error: "Present Address is required",
+  }),
+  permanentAddress: z.string({
+    required_error: "Permanent Address is required",
+  }),
+  guardian: guardianValidationSchema,
+  localGuardian: localGuardianValidationSchema,
+  admissionSemester: z.string({
+    required_error: "Admission Semester is required",
+  }),
+  profileImg: z.string().optional(),
+  academicDepartment: z.string({
+    required_error: "Academic Department is required",
+  }),
 });
 
 export const createFacultyValidationSchema = z.object({
- 
-    name: userNameValidationSchema,
-    designation: z.string({
-      required_error: "Please add a designation",
-    }),
-    gender: z.enum(["male", "female", "other"], {
-      required_error: "Please select a gender",
-    }),
-    dateOfBirth: z.string().optional(),
-    email: z
-      .string({
-        required_error: "Please add an email",
-      })
-      .email("Invalid email format"),
-    contactNo: z.string({
-      required_error: "Please add a contact number",
-    }),
-    emergencyContactNo: z.string({
-      required_error: "Please add an emergency contact number",
-    }),
-    presentAddress: z.string({
-      required_error: "Please add a present address",
-    }),
-    permanentAddress: z.string({
-      required_error: "Please add a permanent address",
-    }),
-    academicFaculty: z.string({
-      required_error: "Please select an academic faculty",
-    }),
-    profileImg: z.string({
-      required_error: "Please add a profile image",
-    }),
-    academicDepartment: z.string({
-      required_error: "Please select an academic department",
-    }),
- 
+  name: userNameValidationSchema,
+  designation: z.string({
+    required_error: "Please add a designation",
+  }),
+  gender: z.enum(["male", "female", "other"], {
+    required_error: "Please select a gender",
+  }),
+  email: z
+    .string({
+      required_error: "Please add an email",
+    })
+    .email("Invalid email format"),
+  contactNo: z.string({
+    required_error: "Please add a contact number",
+  }),
+  emergencyContactNo: z.string({
+    required_error: "Please add an emergency contact number",
+  }),
+  presentAddress: z.string({
+    required_error: "Please add a present address",
+  }),
+  permanentAddress: z.string({
+    required_error: "Please add a permanent address",
+  }),
+  academicFaculty: z.string({
+    required_error: "Please select an academic faculty",
+  }),
+  profileImg: z.string().optional(),
+  academicDepartment: z.string({
+    required_error: "Please select an academic department",
+  }),
 });
 
 export const createAdminValidationSchema = z.object({
-  
-    name: userNameValidationSchema,
-    gender: z.enum(["male", "female", "other"], {
-      required_error: "Gender is required",
-    }),
-    dateOfBirth: z.string().optional(), 
-    email: z
-      .string({
-        required_error: "Email is required",
-      })
-      .email("Invalid email format"),
-    contactNo: z.string({
-      required_error: "Contact Number is required",
-    }),
-    emergencyContactNo: z.string({
-      required_error: "Emergency Contact Number is required",
-    }),
-    managementDepartment: z.string({
-      required_error: "Management Department is required",
-    }),
-    presentAddress: z.string({
-      required_error: "Present Address is required",
-    }),
-    permanentAddress: z.string({
-      required_error: "Permanent Address is required",
-    }),
-
+  name: userNameValidationSchema,
+  gender: z.enum(["male", "female", "other"], {
+    required_error: "Gender is required",
+  }),
+  designation: z.string({
+    required_error: "Contact Number is required",
+  }),
+  email: z
+    .string({
+      required_error: "Email is required",
+    })
+    .email("Invalid email format"),
+  contactNo: z.string({
+    required_error: "Contact Number is required",
+  }),
+  emergencyContactNo: z.string({
+    required_error: "Emergency Contact Number is required",
+  }),
+  managementDepartment: z.string({
+    required_error: "Management Department is required",
+  }),
+  presentAddress: z.string({
+    required_error: "Present Address is required",
+  }),
+  permanentAddress: z.string({
+    required_error: "Permanent Address is required",
+  }),
 });

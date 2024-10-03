@@ -10,7 +10,7 @@ import PHSelect from "../../../components/form/PHSelect"
 import { bloodGroupOptions, genderOptions } from "../../../constants/global"
 import PHDatePicker from "../../../components/form/PHDatePicker"
 import { useGetAcademicDeptQuery, useGetAcademicSemesterQuery } from "../../../redux/features/admin/academicManagementApi"
-import { Controller } from "react-hook-form"
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form"
 
 const studentDefaultValues = {
   name: {
@@ -46,7 +46,7 @@ const studentDefaultValues = {
 };
 const CreateStudent = () => {
   const { data: academicSemeterData, isLoading: academicSemester } = useGetAcademicSemesterQuery(undefined)
-  const { data: academicDepartmentData } = useGetAcademicDeptQuery(undefined, { skip: academicSemester })
+  const { data: academicDepartmentData, isLoading: dIsLoading } = useGetAcademicDeptQuery(undefined, { skip: academicSemester })
 
   const semesterOptions = academicSemeterData?.data?.map(data => ({
     label: `${data.name} ${data.year}`,
@@ -61,7 +61,7 @@ const CreateStudent = () => {
 
 
   const [addStudent] = useAddStudentMutation()
-  const onSubmit = async (values: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
     const toastId = toast.loading("Pleas wait a moment...")
 
     const studentData = {
@@ -71,7 +71,7 @@ const CreateStudent = () => {
     const formData = new FormData()
     formData.append("data", JSON.stringify(studentData))
     formData.append("file", JSON.stringify(values.image))
-    console.log(formData)
+    console.log(values.image)
     try {
       const res = (await addStudent(formData) as TResponse<TStudent>)
       console.log(res);
@@ -240,7 +240,7 @@ const CreateStudent = () => {
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                 <PHSelect
                   options={semesterOptions}
-                  // disabled={sIsLoading}
+                  disabled={academicSemester}
                   name="admissionSemester"
                   label="Admission Semester"
                 />
@@ -248,7 +248,7 @@ const CreateStudent = () => {
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                 <PHSelect
                   options={departmentOptions}
-                  // disabled={dIsLoading}
+                  disabled={dIsLoading}
                   name="academicDepartment"
                   label="Admission Department"
                 />

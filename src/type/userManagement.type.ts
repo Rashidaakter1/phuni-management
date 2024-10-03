@@ -16,7 +16,7 @@ export type TStudent = {
     guardian: TGuardian;
     localGuardian: TLocalGuardian;
     admissionSemester: string;
-    profileImg: string;
+    profileImg?: string;
     isDeleted: boolean;
     academicDepartment: TAcademicDept;
     academicFaculty: TAcademicFaculty;
@@ -76,7 +76,7 @@ export type TFaculty = {
     emergencyContactNo: string;
     presentAddress: string;
     permanentAddress: string;
-    profileImg: string;
+    profileImg?: string;
     academicFaculty: string;
     isDeleted: boolean;
     academicDepartment: TAcademicDept;
