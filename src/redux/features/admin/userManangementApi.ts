@@ -37,10 +37,17 @@ const userManagementApi = baseApi.injectEndpoints({
     }),
     getAllFaculty: builder.query({
       query: (args) => {
+        const params = new URLSearchParams();
+        console.log(args);
+        if (args) {
+          args.forEach((element: TQueryParams) => {
+            params.append(element?.name, element?.value);
+          });
+        }
         return {
           url: "/faculty",
           method: "GET",
-          params: args,
+          params: params,
         };
       },
       transformResponse: (response: TResponseRedux<TFaculty[]>) => {
@@ -62,10 +69,16 @@ const userManagementApi = baseApi.injectEndpoints({
     }),
     getAllAdmin: builder.query({
       query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((element: TQueryParams) => {
+            params.append(element?.name, element?.value);
+          });
+        }
         return {
           url: "/admin",
           method: "GET",
-          params: args,
+          params: params,
         };
       },
       transformResponse: (response: TResponseRedux<TAdmin[]>) => {

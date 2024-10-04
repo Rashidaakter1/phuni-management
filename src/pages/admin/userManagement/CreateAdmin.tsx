@@ -9,7 +9,7 @@ import PHForm from "../../../components/form/PHForm"
 import { Button, Col, Divider, Form, Input, Row, } from "antd"
 import PHInput from "../../../components/form/PHInput"
 import PHSelect from "../../../components/form/PHSelect"
-import {  genderOptions } from "../../../constants/global"
+import { genderOptions } from "../../../constants/global"
 import PHDatePicker from "../../../components/form/PHDatePicker"
 
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form"
@@ -66,7 +66,9 @@ const CreateAdmin = () => {
     <>
       <Row justify="center">
         <Col span={24}>
-          <PHForm onSubmit={onSubmit} defaultValues={adminDefaultValues} resolver={zodResolver(createAdminValidationSchema)}>
+          <PHForm onSubmit={onSubmit} defaultValues={adminDefaultValues}
+          // resolver={zodResolver(createAdminValidationSchema)}
+          >
             <Divider>Personal Info.</Divider>
             <Row gutter={8}>
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>

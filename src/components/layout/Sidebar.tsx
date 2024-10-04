@@ -14,7 +14,7 @@ export const USER_ROLE = {
     FACULTY: "faculty",
 }
 
-const getSidebarItems = () => {
+const getSidebarItems  = () => {
     const currentUserRole = useAppSelector(selectCurrentUser)
     const role = currentUserRole?.role;
     let sidebarItems: TSidebar[];

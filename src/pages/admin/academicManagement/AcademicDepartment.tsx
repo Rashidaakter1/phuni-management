@@ -5,7 +5,7 @@ import { TQueryParams } from '../../../type/global';
 import { useGetAcademicDeptQuery } from '../../../redux/features/admin/academicManagementApi';
 import { TAcademicDept } from '../../../type/academicManagement.type';
 
-type DataType = Pick<TAcademicDept, "name" | "academicFaculty">
+type DataType = Pick<TAcademicDept, "name">
 
 const AcademicDepartment = () => {
   const [params, setParams] = useState<TQueryParams[] | undefined>([])

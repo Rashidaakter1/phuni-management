@@ -1,26 +1,24 @@
 import { TAcademicDept, TAcademicFaculty } from "./academicManagement.type";
 
 export type TStudent = {
-  password: string;
-  student: {
-    id: string;
-    name: TName;
-    gender: string;
-    dateOfBirth: string;
-    email: string;
-    contactNo: string;
-    emergencyContactNo: string;
-    bloodGroup: string;
-    presentAddress: string;
-    permanentAddress: string;
-    guardian: TGuardian;
-    localGuardian: TLocalGuardian;
-    admissionSemester: string;
-    profileImg?: string;
-    isDeleted: boolean;
-    academicDepartment: TAcademicDept;
-    academicFaculty: TAcademicFaculty;
-  };
+  _id: string;
+  id: string;
+  name: TName;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloodGroup: string;
+  presentAddress: string;
+  permanentAddress: string;
+  guardian: TGuardian;
+  localGuardian: TLocalGuardian;
+  admissionSemester: string;
+  profileImg?: string;
+  isDeleted: boolean;
+  academicDepartment: TAcademicDept;
+  academicFaculty: TAcademicFaculty;
 };
 
 export type TName = {
@@ -46,39 +44,35 @@ export type TLocalGuardian = {
 };
 
 export type TAdmin = {
-  password: string;
-  admin: {
-    id: string;
-    designation: string;
-    name: TName;
-    gender: string;
-    dateOfBirth: string;
-    email: string;
-    contactNo: string;
-    emergencyContactNo: string;
-    presentAddress: string;
-    permanentAddress: string;
-    profileImg: string;
-    managementDepartment: string;
-    isDeleted: boolean;
-  };
+  _id: string;
+  id: string;
+  designation: string;
+  name: TName;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg: string;
+  managementDepartment: string;
+  isDeleted: boolean;
 };
 export type TFaculty = {
-  password: string;
-  faculty: {
-    id: string;
-    name: TName;
-    designation: string;
-    gender: string;
-    dateOfBirth: string;
-    email: string;
-    contactNo: string;
-    emergencyContactNo: string;
-    presentAddress: string;
-    permanentAddress: string;
-    profileImg?: string;
-    academicFaculty: string;
-    isDeleted: boolean;
-    academicDepartment: TAcademicDept;
-  };
+  _id: string;
+  id: string;
+  name: TName;
+  designation: string;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg?: string;
+  academicFaculty: string;
+  isDeleted: boolean;
+  academicDepartment: TAcademicDept;
 };
