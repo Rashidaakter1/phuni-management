@@ -18,7 +18,8 @@ const AdminDataTable = () => {
   const metaData = adminData?.meta
   const tableData = adminData?.data?.map(
     ({ id, _id, name, contactNo, email }) => ({
-      key: id, _id,
+      key: _id,
+      _id,
       id,
       name: name?.firstName,
       contactNo,

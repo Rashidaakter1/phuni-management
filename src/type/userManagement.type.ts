@@ -3,7 +3,11 @@ import { TAcademicDept, TAcademicFaculty } from "./academicManagement.type";
 export type TStudent = {
   _id: string;
   id: string;
-  name: TName;
+  name: {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+  };
   gender: string;
   dateOfBirth: string;
   email: string;

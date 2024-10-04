@@ -28,6 +28,22 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSingleStudents: builder.query({
+      query: (id) => {
+        return {
+          url: `/students/${id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: TResponseRedux<TStudent[]>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+
     addStudent: builder.mutation({
       query: (data) => ({
         url: "/users/create-student",
@@ -51,6 +67,22 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: TResponseRedux<TFaculty[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+
+    getSingleFaculty: builder.query({
+      query: (id) => {
+        return {
+          url: `/faculty/${id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: TResponseRedux<TFaculty[]>) => {
+        console.log("first response", response);
         return {
           data: response.data,
           meta: response.meta,
@@ -88,6 +120,22 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    getSingleAdmin: builder.query({
+      query: (id) => {
+        return {
+          url: `/admin/${id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: TResponseRedux<TAdmin[]>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
     addAdmin: builder.mutation({
       query: (data) => ({
         url: "/users/create-admin",
@@ -105,4 +153,7 @@ export const {
   useGetAllFacultyQuery,
   useAddStudentMutation,
   useGetAllStudentsQuery,
+  useGetSingleStudentsQuery,
+  useGetSingleAdminQuery,
+  useGetSingleFacultyQuery
 } = userManagementApi;
