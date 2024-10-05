@@ -14,7 +14,7 @@ import { useGetAcademicDeptQuery, useGetAcademicFacultyQuery } from "../../../re
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form"
 const facultyDefaultValues = {
     name: {
-        firstName: 'I am ',
+        firstName: 'Amin',
         middleName: 'Faculty',
         lastName: 'Number 1',
     },
@@ -26,7 +26,7 @@ const facultyDefaultValues = {
     emergencyContactNo: '987-654-3210',
     presentAddress: '123 Main St, Cityville',
     permanentAddress: '456 Oak St, Townsville',
-    profileImg: ""
+
 
 };
 const CreateFaculty = () => {
@@ -47,7 +47,7 @@ const CreateFaculty = () => {
     const [addFaculty] = useAddFacultyMutation()
 
     const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-        const toastId = toast.loading("Pleas wait a moment...")
+        const toastId = toast.loading("Please wait a moment...")
 
         const facultyData = {
             password: "faculty123",
@@ -55,15 +55,15 @@ const CreateFaculty = () => {
         }
         const formData = new FormData()
         formData.append("data", JSON.stringify(facultyData))
-        formData.append("file", JSON.stringify(values.image))
+        formData.append("file", values.image)
         console.log(values.image)
         try {
-            const res = (await addFaculty(formData) as TResponse<TFaculty>)
+            const res = (await addFaculty(formData) as TResponse<any>)
             console.log(res);
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
             } else {
-                toast.success(res?.message, { id: toastId });
+                toast.success(res?.data?.message, { id: toastId });
             }
 
         } catch (error) {
@@ -78,8 +78,8 @@ const CreateFaculty = () => {
         <Row justify="center">
             <Col span={24}>
                 <PHForm onSubmit={onSubmit} defaultValues={facultyDefaultValues}
-                 resolver={zodResolver(createFacultyValidationSchema)} 
-                 >
+                // resolver={zodResolver(createFacultyValidationSchema)}
+                >
                     <Divider>Personal Info.</Divider>
                     <Row gutter={8}>
                         <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>

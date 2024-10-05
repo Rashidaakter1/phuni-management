@@ -59,7 +59,6 @@ export const createStudentValidationSchema = z.object({
   gender: z.enum(["male", "female", "other"], {
     required_error: "Gender is required",
   }),
-  dateOfBirth: z.string().optional(),
   email: z
     .string({
       required_error: "Email is required",
@@ -85,13 +84,23 @@ export const createStudentValidationSchema = z.object({
   admissionSemester: z.string({
     required_error: "Admission Semester is required",
   }),
-  profileImg: z.string().optional(),
   academicDepartment: z.string({
     required_error: "Academic Department is required",
   }),
+
+  image: z
+    .any()
+    .refine((file) => file instanceof File, {
+      message: "Image is required",
+    })
+    .refine(
+      (file) => ["image/jpeg", "image/png"].includes(file?.type),
+      "Only .jpg and .png files are allowed"
+    ),
 });
 
 export const createFacultyValidationSchema = z.object({
+  
   name: userNameValidationSchema,
   designation: z.string({
     required_error: "Please add a designation",
@@ -119,10 +128,19 @@ export const createFacultyValidationSchema = z.object({
   academicFaculty: z.string({
     required_error: "Please select an academic faculty",
   }),
-  profileImg: z.string().optional(),
+
   academicDepartment: z.string({
     required_error: "Please select an academic department",
   }),
+  image: z
+    .any()
+    .refine((file) => file instanceof File, {
+      message: "Image is required",
+    })
+    .refine(
+      (file) => ["image/jpeg", "image/png"].includes(file?.type),
+      "Only .jpg and .png files are allowed"
+    ),
 });
 
 export const createAdminValidationSchema = z.object({
@@ -131,7 +149,7 @@ export const createAdminValidationSchema = z.object({
     required_error: "Gender is required",
   }),
   designation: z.string({
-    required_error: "Contact Number is required",
+    required_error: "Please add a designation",
   }),
   email: z
     .string({
@@ -144,13 +162,23 @@ export const createAdminValidationSchema = z.object({
   emergencyContactNo: z.string({
     required_error: "Emergency Contact Number is required",
   }),
-  managementDepartment: z.string({
-    required_error: "Management Department is required",
-  }),
+
   presentAddress: z.string({
     required_error: "Present Address is required",
   }),
   permanentAddress: z.string({
     required_error: "Permanent Address is required",
   }),
+  managementDepartment: z.string({
+    required_error: "Management Department is required",
+  }),
+  image: z
+    .any()
+    .refine((file) => file instanceof File, {
+      message: "Image is required",
+    })
+    .refine(
+      (file) => ["image/jpeg", "image/png"].includes(file?.type),
+      "Only .jpg and .png files are allowed"
+    ),
 });

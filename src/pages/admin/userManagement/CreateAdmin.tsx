@@ -18,19 +18,18 @@ import { useAddAdminMutation } from "../../../redux/features/admin/userManangeme
 
 const adminDefaultValues = {
   name: {
-    firstName: 'I am ',
+    firstName: 'Ras',
     middleName: 'Faculty',
     lastName: 'Number 1',
   },
-  designation: "Head of Testing",
+  designation: "Head of business",
   gender: 'male',
-  email: "bc@example.com",
+  email: "rac@example.com",
   contactNo: '1235678',
   emergencyContactNo: '987-654-3210',
   presentAddress: '123 Main St, Cityville',
   permanentAddress: '456 Oak St, Townsville',
-  profileImg: "",
-  managementDepartment: "Management"
+  managementDepartment: "Business"
 };
 const CreateAdmin = () => {
 
@@ -38,21 +37,25 @@ const CreateAdmin = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
     const toastId = toast.loading("Pleas wait a moment...")
 
+    console.log(values)
     const AdminData = {
       password: "admin123",
       admin: values
     }
     const formData = new FormData()
     formData.append("data", JSON.stringify(AdminData))
-    formData.append("file", JSON.stringify(values.image))
-    console.log(values.image)
+    formData.append("file", values.image)
+
+
+    console.log(values?.image)
+    console.log(Object.fromEntries(formData));
     try {
-      const res = (await addAdmin(formData) as TResponse<TAdmin>)
+      const res = (await addAdmin(formData) as TResponse<any>)
       console.log(res);
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
       } else {
-        toast.success(res?.message, { id: toastId });
+        toast.success(res?.data?.message, { id: toastId });
       }
 
     } catch (error) {
@@ -67,7 +70,7 @@ const CreateAdmin = () => {
       <Row justify="center">
         <Col span={24}>
           <PHForm onSubmit={onSubmit} defaultValues={adminDefaultValues}
-          // resolver={zodResolver(createAdminValidationSchema)}
+          resolver={zodResolver(createAdminValidationSchema)}
           >
             <Divider>Personal Info.</Divider>
             <Row gutter={8}>
@@ -136,7 +139,6 @@ const CreateAdmin = () => {
                 />
               </Col>
             </Row>
-
 
             <Divider>Academic Info.</Divider>
             <Row gutter={8}>

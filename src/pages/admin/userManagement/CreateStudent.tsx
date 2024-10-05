@@ -24,7 +24,7 @@ const studentDefaultValues = {
   emergencyContactNo: '987-654-3210',
   presentAddress: '123 Main St, Cityville',
   permanentAddress: '456 Oak St, Townsville',
-
+  email: "hello@gmail.com",
   guardian: {
     fatherName: 'James Doe',
     fatherOccupation: 'Engineer',
@@ -41,8 +41,7 @@ const studentDefaultValues = {
     address: '789 Pine St, Villageton',
   },
 
-  // admissionSemester: '65bb60ebf71fdd1add63b1c0',
-  // academicDepartment: '65b4acae3dc8d4f3ad83e416',
+
 };
 const CreateStudent = () => {
   const { data: academicSemeterData, isLoading: academicSemester } = useGetAcademicSemesterQuery(undefined)
@@ -70,15 +69,21 @@ const CreateStudent = () => {
     }
     const formData = new FormData()
     formData.append("data", JSON.stringify(studentData))
-    formData.append("file", JSON.stringify(values.image))
-    console.log(values.image)
+    formData.append("file", values?.image)
+
+    //! This is for development
+    //! Just for checking
+    console.log(values?.image)
+    console.log(Object.fromEntries(formData));
+
+
     try {
-      const res = (await addStudent(formData) as TResponse<TStudent>)
+      const res = (await addStudent(formData) as TResponse<any>)
       console.log(res);
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
       } else {
-        toast.success(res?.message, { id: toastId });
+        toast.success(res?.data?.message, { id: toastId });
       }
 
     } catch (error) {
@@ -92,7 +97,9 @@ const CreateStudent = () => {
     <>
       <Row justify="center">
         <Col span={24}>
-          <PHForm onSubmit={onSubmit} defaultValues={studentDefaultValues} resolver={zodResolver(createStudentValidationSchema)}>
+          <PHForm onSubmit={onSubmit} defaultValues={studentDefaultValues}
+            resolver={zodResolver(createStudentValidationSchema)}
+          >
             <Divider>Personal Info.</Divider>
             <Row gutter={8}>
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
@@ -120,6 +127,7 @@ const CreateStudent = () => {
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                 <Controller
                   name="image"
+
                   render={({ field: { onChange, value, ...field } }) => (
                     <Form.Item label="Picture">
                       <Input
