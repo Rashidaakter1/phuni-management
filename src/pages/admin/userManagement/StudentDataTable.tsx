@@ -4,7 +4,8 @@ import { Button, Pagination, Space, Table, TableColumnsType, TableProps } from "
 import { TQueryParams, TStudent } from "../../../type";
 import { useState } from "react";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManangementApi";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import UpdateModal from "./UpdateModal";
 
 
 
@@ -13,21 +14,36 @@ type DataType = Pick<TStudent, "email" | "id" | 'contactNo' | "_id">
 
 
 const StudentDataTable = () => {
+  let location = useLocation();
+  console.log(location)
   const [params, setParams] = useState<TQueryParams[]>([])
   const [page, setPage] = useState(1)
-  const { data: studentData, isLoading, isFetching } = useGetAllStudentsQuery([
+  const [open, setOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [id, setId] = useState("")
+
+  const showLoading = (id: string) => {
+    setOpen(true);
+    setLoading(true);
+    setId(id);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
+
+  const { data: studentData, isFetching } = useGetAllStudentsQuery([
     // { name: "limit", value: 2 },
     { name: "page", value: page },
     { name: "sort", value: "id" },
     ...params])
-  console.log(studentData)
+
   const metaData = studentData?.meta
   const tableData = studentData?.data?.map(
     ({ _id, id, name, contactNo, email }) => ({
       key: _id,
       _id,
       id,
-      name: name?.firstName,
+      name: `${name?.firstName} ${name?.middleName} ${name?.lastName} `,
       contactNo,
       email
     })
@@ -58,14 +74,14 @@ const StudentDataTable = () => {
       title: 'Action',
       key: 'x',
       render: (item) => {
-        console.log(item);
         return (
           <Space>
             <Link to={`/admin/student-data/${item.key}`}>
               <Button>Details</Button>
             </Link>
-            <Button>Update</Button>
-            <Button>Block</Button>
+            <Link to={`/admin/edit-student/${item.key}`}> <Button >Update</Button></Link>
+            <Button onClick={() => showLoading(item.key)}>Block</Button>
+            <Button >Delete</Button>
           </Space>
         );
       },
@@ -99,7 +115,7 @@ const StudentDataTable = () => {
         showSorterTooltip={{ target: 'sorter-icon' }}
       />
       <Pagination current={page} onChange={(value) => setPage(value)} pageSize={metaData?.limit} total={metaData?.total} />
-
+      <UpdateModal showLoading={showLoading} open={open} setOpen={setOpen} loading={loading} id={id} />
     </div>
   )
 }

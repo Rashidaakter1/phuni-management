@@ -36,7 +36,7 @@ const userManagementApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      transformResponse: (response: TResponseRedux<TStudent[]>) => {
+      transformResponse: (response: TResponseRedux<any>) => {
         console.log("first response", response);
         return {
           data: response.data,

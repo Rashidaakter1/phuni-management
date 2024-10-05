@@ -13,6 +13,7 @@ import AdminDetails from "../pages/admin/userManagement/AdminDetails";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
 import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
 import CreateStudent from "../pages/admin/userManagement/CreateStudent";
+import EditStudentDetails from "../pages/admin/userManagement/EditStudentDetails";
 import FacultyDataTable from "../pages/admin/userManagement/FacultyDataTable";
 import FacultyDetails from "../pages/admin/userManagement/FacultyDetails";
 import StudentDataTable from "../pages/admin/userManagement/StudentDataTable";
@@ -109,6 +110,11 @@ export const adminPaths = [
                 name: 'Admin',
                 path: 'admin',
                 element: <AdminDataTable />,
+            },
+            {
+
+                path: 'edit-student/:studentId',
+                element: <EditStudentDetails />,
             },
         ],
     },

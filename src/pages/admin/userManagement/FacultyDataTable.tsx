@@ -27,7 +27,7 @@ const FacultyDataTable = () => {
             key: _id,
             _id,
             id,
-            name: name?.firstName,
+            name: `${name?.firstName} ${name?.middleName} ${name?.lastName} `,
             contactNo,
             email
         })
