@@ -20,6 +20,7 @@ const userManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["students"],
       transformResponse: (response: TResponseRedux<TStudent[]>) => {
         console.log("first response", response);
         return {
@@ -44,14 +45,50 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
-
+    deleteSingleStudents: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/students/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["students"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
     addStudent: builder.mutation({
       query: (data) => ({
         url: "/users/create-student",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["students"],
     }),
+    updateSingleStudent: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/students/${args.id}`,
+          method: "PATCH",
+          body: args.data,
+        };
+      },
+      invalidatesTags: ["students"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+
+    // this is for Fcaulty purposes
+
     getAllFaculty: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -67,6 +104,7 @@ const userManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["faculty"],
       transformResponse: (response: TResponseRedux<TFaculty[]>) => {
         return {
           data: response.data,
@@ -99,7 +137,43 @@ const userManagementApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["faculty"],
     }),
+    updateSingleFaculty: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/faculty/${args.id}`,
+          method: "PATCH",
+          body: args.data,
+        };
+      },
+      invalidatesTags: ["faculty"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+    deleteSingleFaculty: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/faculty/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["faculty"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+
+    // this is for the admin
     getAllAdmin: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -114,6 +188,7 @@ const userManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["admin"],
       transformResponse: (response: TResponseRedux<TAdmin[]>) => {
         return {
           data: response.data,
@@ -146,6 +221,40 @@ const userManagementApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["admin"],
+    }),
+    updateSingleAdmin: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/admin/${args.id}`,
+          method: "PATCH",
+          body: args.data,
+        };
+      },
+      invalidatesTags: ["admin"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+    deleteSingleAdmin: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/admin/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["admin"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("first response", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
     }),
   }),
 });
@@ -160,4 +269,10 @@ export const {
   useGetSingleStudentsQuery,
   useGetSingleAdminQuery,
   useGetSingleFacultyQuery,
+  useDeleteSingleStudentsMutation,
+  useDeleteSingleAdminMutation,
+  useDeleteSingleFacultyMutation,
+  useUpdateSingleAdminMutation,
+  useUpdateSingleFacultyMutation,
+  useUpdateSingleStudentMutation,
 } = userManagementApi;

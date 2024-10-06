@@ -1,6 +1,6 @@
 
 import { toast } from "sonner"
-import { TFaculty, TResponse } from "../../../type"
+import {  TResponse } from "../../../type"
 import { useAddFacultyMutation } from "../../../redux/features/admin/userManangementApi"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createFacultyValidationSchema } from "../../../schemas/userManagement.schema"
@@ -78,7 +78,7 @@ const CreateFaculty = () => {
         <Row justify="center">
             <Col span={24}>
                 <PHForm onSubmit={onSubmit} defaultValues={facultyDefaultValues}
-                // resolver={zodResolver(createFacultyValidationSchema)}
+                resolver={zodResolver(createFacultyValidationSchema)}
                 >
                     <Divider>Personal Info.</Divider>
                     <Row gutter={8}>

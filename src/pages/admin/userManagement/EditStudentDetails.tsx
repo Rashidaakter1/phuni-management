@@ -19,7 +19,7 @@ import { useParams } from 'react-router-dom'
 
 const EditStudentDetails = () => {
   const { studentId } = useParams()
-  const { data, isFetching } = useGetSingleStudentsQuery(studentId)
+  const { data, } = useGetSingleStudentsQuery(studentId)
   const studentData = data?.data
 
   console.log(studentData);  // Logs the whole object in an expandable format

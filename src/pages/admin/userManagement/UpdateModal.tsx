@@ -6,7 +6,7 @@ type TModalProps = {
 }
 const UpdateModal = ({ showLoading, loading, open, setOpen, id }: TModalProps) => {
     console.log(id)
-    const { data: studentData, isFetching } = useGetSingleStudentsQuery(id)
+    const { data: studentData, } = useGetSingleStudentsQuery(id)
     console.log(studentData)
     return (
         <Modal

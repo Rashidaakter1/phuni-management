@@ -1,11 +1,12 @@
 
 
-import { Button, Pagination, Space, Table, TableColumnsType, TableProps } from "antd";
-import { TQueryParams, TStudent } from "../../../type";
+import { Button, message, Pagination, Popconfirm, PopconfirmProps, Space, Table, TableColumnsType, TableProps } from "antd";
+import { TQueryParams, TResponse, TStudent } from "../../../type";
 import { useState } from "react";
-import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManangementApi";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useDeleteSingleStudentsMutation, useGetAllStudentsQuery } from "../../../redux/features/admin/userManangementApi";
+import { Link, useLocation, } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
+import { toast } from "sonner";
 
 
 
@@ -48,6 +49,32 @@ const StudentDataTable = () => {
       email
     })
   );
+  const [deleteStudent] = useDeleteSingleStudentsMutation()
+  const confirm = async (id: string) => {
+    console.log(id)
+    message.success('Click on Yes');
+
+    const toastId = toast.loading("Please wait a moment...")
+    try {
+      const res = (await deleteStudent(id) as TResponse<any>)
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success(res?.data.message, { id: toastId });
+      }
+
+    } catch (error) {
+      toast.error("Something went wrong", {
+        id: toastId, duration: 2000
+      })
+    }
+  };
+
+  const cancel: PopconfirmProps['onCancel'] = (e) => {
+    console.log(e);
+
+  };
   const columns: TableColumnsType<DataType> = [
     {
       title: 'Name',
@@ -81,7 +108,16 @@ const StudentDataTable = () => {
             </Link>
             <Link to={`/admin/edit-student/${item.key}`}> <Button >Update</Button></Link>
             <Button onClick={() => showLoading(item.key)}>Block</Button>
-            <Button >Delete</Button>
+            <Popconfirm
+              title="Delete the student"
+              description="Are you sure to delete this student?"
+              onConfirm={() => confirm(item.key)}
+              onCancel={cancel}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button >Delete</Button>
+            </Popconfirm>
           </Space>
         );
       },

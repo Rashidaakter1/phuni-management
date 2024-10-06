@@ -1,7 +1,7 @@
 
 
 import { toast } from "sonner"
-import { TAdmin, TResponse, } from "../../../type"
+import {  TResponse, } from "../../../type"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 
