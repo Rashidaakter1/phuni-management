@@ -10,7 +10,7 @@ type DataType = Pick<TAdmin, "_id" | "email" | "id" | 'contactNo'>
 const AdminDataTable = () => {
   const [params, setParams] = useState<TQueryParams[]>([])
   const [page, setPage] = useState(1)
-  const { data: adminData, isLoading, isFetching } = useGetAllAdminQuery([
+  const { data: adminData, isFetching } = useGetAllAdminQuery([
     // { name: "limit", value: 2 },
     { name: "page", value: page },
     { name: "sort", value: "id" },
