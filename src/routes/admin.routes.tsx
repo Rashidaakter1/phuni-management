@@ -10,9 +10,11 @@ import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcad
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import Courses from "../pages/admin/courseManagement/Courses";
 import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
-import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
+import CreateOfferCourse from "../pages/admin/courseManagement/CreateOfferCourse";
+import CreateSemesterRegistration from "../pages/admin/courseManagement/CreateSemesterRegistration";
+
 import RegisteredSemesters from "../pages/admin/courseManagement/RegisteredSemesters";
-import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
+
 import AdminDataTable from "../pages/admin/userManagement/AdminDataTable";
 import AdminDetails from "../pages/admin/userManagement/AdminDetails";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
@@ -128,9 +130,9 @@ export const adminPaths = [
         name: 'Course Management',
         children: [
             {
-                name: 'Semester Registration',
-                path: 'semester-registration',
-                element: <SemesterRegistration />,
+                name: ' Create Semester Registration',
+                path: 'create-semester-registration',
+                element: <CreateSemesterRegistration />,
             },
             {
                 name: 'Registered Semesters',
@@ -148,9 +150,9 @@ export const adminPaths = [
                 element: <Courses />,
             },
             {
-                name: 'Offer Course',
-                path: 'offer-course',
-                element: <OfferCourse />,
+                name: 'Create Offer Course',
+                path: 'create-offer-course',
+                element: <CreateOfferCourse />,
             },
             {
                 name: 'Offered Courses',

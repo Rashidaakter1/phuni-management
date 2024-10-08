@@ -49,7 +49,7 @@ const CreateCourse = () => {
         }
     };
     return (
-        <Flex justify="center" align="center">
+        <div>
             <Col span={6}>
                 <PHForm onSubmit={onSubmit}>
                     <PHInput type="text" name="title" label="Title" />
@@ -65,7 +65,7 @@ const CreateCourse = () => {
                     <Button htmlType="submit">Submit</Button>
                 </PHForm>
             </Col>
-        </Flex>
+        </div>
     )
 }
 

@@ -12,7 +12,12 @@ export const monthNames = [
     'November',
     'December',
 ];
+export const weekNames = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
 
+export const weekOptions = weekNames.map(name => ({
+    value: name,
+    label: name
+}))
 export const monthOptions = monthNames.map(name => ({
     value: name,
     label: name
