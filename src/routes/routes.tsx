@@ -5,8 +5,9 @@ import About from "../pages/About"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
 import routesGenerator from "../utils/routesGenerator"
-import { adminPaths } from "./admin.routes"
+
 import { studentPaths } from "./student.route"
+import { adminPaths } from "./admin.routes"
 
 
 const router = createBrowserRouter([

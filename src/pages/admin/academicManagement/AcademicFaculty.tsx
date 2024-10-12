@@ -1,5 +1,5 @@
 import { Button, Table, TableColumnsType, TableProps } from 'antd';
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { TAcademicFaculty } from '../../../type/academicManagement.type';
 import { TQueryParams } from '../../../type/global';
 import { useGetAcademicFacultyQuery } from '../../../redux/features/admin/academicManagementApi';
@@ -9,7 +9,7 @@ import { useGetAcademicFacultyQuery } from '../../../redux/features/admin/academ
 type DataType = Pick<TAcademicFaculty, "name">
 const AcademicFaculty = () => {
   const [params, setParams] = useState<TQueryParams[] | undefined>([])
-  const { data: facultyData, isLoading, isFetching } = useGetAcademicFacultyQuery(params)
+  const { data: facultyData, isFetching } = useGetAcademicFacultyQuery(params)
   const tableData = facultyData?.data?.map(
     ({ _id, name }) => ({
       key: _id,

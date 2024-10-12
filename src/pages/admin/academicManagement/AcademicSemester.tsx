@@ -11,7 +11,7 @@ type DataType = Pick<TAcademicSemester, "name" | "year" | "startMonth" | "endMon
 
 const AcademicSemester = () => {
     const [params, setParams] = useState<TQueryParams[] | undefined>([])
-    const { data: semesterData, isLoading, isFetching } = useGetAcademicSemesterQuery(params)
+    const { data: semesterData, isFetching } = useGetAcademicSemesterQuery(params)
     const tableData = semesterData?.data?.map(
         ({ _id, name, startMonth, endMonth, year }) => ({
             key: _id,

@@ -2,34 +2,37 @@
 import { Button, Col } from "antd"
 import PHForm from "../../../components/form/PHForm"
 import PHSelect from "../../../components/form/PHSelect"
-import { semesterOptions } from "../../../constants/semeter";
-import { monthOptions } from "../../../constants/global";
-import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagementApi";
+import {  semesterStatusOptions } from "../../../constants/semeter";
+import {  useGetAcademicSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
 import { toast } from "sonner";
 import { TResponse } from "../../../type/global";
-import { TAcademicSemester } from "../../../type/academicManagement.type";
+import PHDatePicker from "../../../components/form/PHDatePicker";
+import PHInput from "../../../components/form/PHInput";
+import { useAddRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagementApi";
 
-const currentYear = new Date().getFullYear();
-const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
-    value: String(currentYear + number),
-    label: String(currentYear + number),
-}));
+
 const CreateSemesterRegistration = () => {
-    const [addAcademicSemester] = useAddAcademicSemesterMutation()
+    const [addSemester] = useAddRegisteredSemesterMutation()
+    const { data: academicSemester } = useGetAcademicSemesterQuery([
+        { name: 'sort', value: 'year' },
+    ]);
+    const academicSemesterOptions = academicSemester?.data?.map((item) => ({
+        value: item._id,
+        label: `${item.name} ${item.year}`,
+    }));
+
     const onSubmit = async (values: any) => {
-        const toastId = toast.loading("Pleas wait a moment...")
-        const semesterName = semesterOptions[Number(values.name) - 1].label
+        const toastId = toast.loading("Please wait a moment...")
+
         const semesterData = {
-            name: semesterName,
-            code: values.name,
-            year: values.year,
-            startMonth: values.startMonth,
-            endMonth: values.endMonth
-        }
+            ...values,
+            minCredit: Number(values.minCredit),
+            maxCredit: Number(values.maxCredit),
+        };
+
+        console.log(semesterData);
         try {
-            const res = (await addAcademicSemester(semesterData) as TResponse<TAcademicSemester>)
+            const res = (await addSemester(semesterData) as TResponse<any>)
             console.log(res);
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
@@ -46,17 +49,23 @@ const CreateSemesterRegistration = () => {
     }
     return (
         <Col span={6}>
-            <PHForm onSubmit={onSubmit}
-            //  resolver={zodResolver(academicSemesterSchema)}
-            
-            >
-                <PHSelect name="name" label="Name" options={semesterOptions} />
-                <PHSelect name="year" label="Year" options={yearOptions} />
-                <PHSelect name="startMonth" label="Start Month" options={monthOptions} />
-                <PHSelect name="endMonth" label="End Month" options={monthOptions} />
+            <PHForm onSubmit={onSubmit}>
+                <PHSelect
+                    label="Academic Semester"
+                    name="academicSemester"
+                    options={academicSemesterOptions}
+                />
+                <PHSelect
+                    name="status"
+                    label="Status"
+                    options={semesterStatusOptions}
+                />
+                <PHDatePicker name="startDate" label="Start Date" />
+                <PHDatePicker name="endDate" label="End Date" />
+                <PHInput type="text" name="minCredit" label="Min Credit" />
+                <PHInput type="text" name="maxCredit" label="Max Credit" />
                 <Button htmlType="submit">Submit</Button>
             </PHForm>
-
         </Col>
     )
 }

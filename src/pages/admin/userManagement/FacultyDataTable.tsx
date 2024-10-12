@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDeleteSingleFacultyMutation, useGetAllFacultyQuery } from "../../../redux/features/admin/userManangementApi";
 import { toast } from "sonner";
+import UpdateModal from "./UpdateModal";
 
 type DataType = Pick<TFaculty, "_id" | "email" | "id" | 'contactNo'>
 
@@ -152,6 +153,7 @@ const FacultyDataTable = () => {
             />
 
             <Pagination current={page} onChange={(value) => setPage(value)} pageSize={metaData?.limit} total={metaData?.total} />
+            <UpdateModal showLoading={showLoading} open={open} setOpen={setOpen} loading={loading} id={id} />
         </div>
     )
 }

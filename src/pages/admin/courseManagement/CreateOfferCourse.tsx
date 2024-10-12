@@ -3,7 +3,7 @@
 import PHSelect from '../../../components/form/PHSelect'
 import PHForm from '../../../components/form/PHForm'
 import PHInput from '../../../components/form/PHInput'
-import { Button, Col, Flex } from 'antd'
+import { Button, Col } from 'antd'
 import { TResponse } from '../../../type'
 import { toast } from 'sonner'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
@@ -26,7 +26,7 @@ const CreateOfferCourse = () => {
   }))
 
   // academic department options
-  const { data: academicDepartmentData, isLoading: dIsLoading } = useGetAcademicDeptQuery(undefined, { skip: academicSemester })
+  const { data: academicDepartmentData } = useGetAcademicDeptQuery(undefined, { skip: academicSemester })
 
   const departmentOptions = academicDepartmentData?.data?.map(data => ({
     label: data.name,

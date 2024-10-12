@@ -1,4 +1,4 @@
-import { Button, Modal, Pagination, Table, TableProps } from 'antd';
+import { Button, Modal, Pagination, Table, } from 'antd';
 
 import { useState } from 'react';
 import PHForm from '../../../components/form/PHForm';
@@ -17,7 +17,7 @@ type FacultyInfo = {
 
 const Courses = () => {
     // const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
-    const [params, setParams] = useState<TQueryParams[]>([])
+    const [params] = useState<TQueryParams[]>([])
     const [page, setPage] = useState(1)
     const { data: courses, isFetching } = useGetAllCoursesQuery([
         // { name: "limit", value: 2 },
@@ -51,17 +51,17 @@ const Courses = () => {
         },
     ];
 
-    const onChange: TableProps<FacultyInfo>['onChange'] = (
-        _pagination,
-        filters,
-        _sorter,
-        extra
-    ) => {
-        if (extra.action === 'filter') {
-            const queryParams: TQueryParams[] = [];
-            setParams(queryParams);
-        }
-    };
+    // const onChange: TableProps<FacultyInfo>['onChange'] = (
+    //     _pagination,
+    //     filters,
+    //     _sorter,
+    //     extra
+    // ) => {
+    //     if (extra.action === 'filter') {
+    //         const queryParams: TQueryParams[] = [];
+    //         setParams(queryParams);
+    //     }
+    // };
 
     return (
         <>
@@ -69,7 +69,7 @@ const Courses = () => {
                 loading={isFetching}
                 columns={columns}
                 dataSource={tableData}
-            onChange={onChange}
+            // onChange={onChange}
             />
             <Pagination current={page} onChange={(value) => setPage(value)} pageSize={metaData?.limit} total={metaData?.total} /></>
     );

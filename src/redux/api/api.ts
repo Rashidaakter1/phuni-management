@@ -9,7 +9,7 @@ import {
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
-import { TError } from "../../type/global";
+import { TError } from "../../type";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api/v1/",
@@ -30,9 +30,13 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 > = async (args, api, extraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
   console.log(result);
-  // const resultError = result.error as TError;
   if (result?.error?.status === 404) {
-    toast.error(result?.error.data?.message);
+    const resultError = result?.error as TError;
+    toast.error(resultError.data?.message || "An error occurred");
+  }
+  if (result?.error?.status === 403) {
+    const resultError = result?.error as TError;
+    toast.error(resultError?.data?.message);
   }
   if (result?.error?.status === 401) {
     //* Send Refresh
