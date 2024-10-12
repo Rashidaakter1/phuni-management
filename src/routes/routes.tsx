@@ -46,6 +46,11 @@ const router = createBrowserRouter([
         element: <Register />,
 
     },
+    {
+        path: "*",
+        element: <Register />,
+
+    },
 
 ])
 
